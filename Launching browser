@@ -1,0 +1,32 @@
+"""This file takes latitude , longitude and location 
+   and launches the google map in browser through python.
+"""
+
+
+import sqlite3
+import json
+import codecs
+import webbrowser
+
+def create_js(lat,lng,where):
+
+    new = 2
+    
+    fhand = codecs.open('where.js','w', "utf-8")
+    fhand.write("myData = [\n")    
+    
+    if lat == 0 or lng == 0 : return
+    
+    try :
+        print where, lat, lng
+
+        output = "["+str(lat)+","+str(lng)+", '"+where+"']"
+        fhand.write(output)
+    except:
+        return
+        
+    fhand.write("\n];\n")
+    fhand.close()
+    
+    url = "file:///C:/Users/acer/Desktop/Python/where.html"
+    webbrowser.open(url,new=new)
