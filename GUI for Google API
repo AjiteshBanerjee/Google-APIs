@@ -1,0 +1,49 @@
+#This is the GUI for taking the user input.
+
+import Tkinter as tk
+from GAPIMAPS import address_loop
+
+class App():
+    def __init__(self,main,name):
+        self.master=main
+        self.master.title(name)
+        self.master["background"]="light blue"
+        self.topFrame=tk.Frame(self.master)
+        self.topFrame["background"]="light blue"
+        self.topFrame.pack(fill=tk.BOTH, expand=1)#X, Y, BOTH, NONE
+        #self.topFrame.pack()
+        #self.topFrame.grid(row=rr, column=cc)
+
+    def add_main_label(self,msg,r,c):
+        self.label=tk.Label(self.topFrame, text=msg)
+        self.label["background"]="light blue"
+        #self.label.pack()
+        self.label.grid(row=r, column=c)
+
+    def add_button(self, name, rrr, ccc):
+        self.button=tk.Button(self.topFrame)
+        self.button["text"]=name
+        #self.button.place(x=5, y=10)
+        #self.button.pack()
+        self.button.grid(row=rrr, column=ccc)
+        self.button.bind("<Button-1>", self.echoname)
+        return self.button
+
+    def echoname(self,event):
+        city_name=self.ent.get()
+        address_loop(city_name)
+    
+    def add_entry(self, rr, cc):
+        self.ent=tk.StringVar()
+        self.entry=tk.Entry(self.topFrame, textvariable=self.ent)
+        self.entry.grid(row=rr, column=cc)
+        
+#Main starts from here
+root=tk.Tk()#Create main window
+GoogleApp=App(root,"GOOGlE MAPS")
+
+GoogleApp.add_main_label("*Please Enter Any Place Name", 0, 0)
+GoogleApp.add_main_label("    L O C A T I O N    ", 1, 0)
+GoogleApp.add_entry(1, 1)
+GoogleApp.add_button("  SUBMIT  ", 2, 1)
+root.mainloop()
